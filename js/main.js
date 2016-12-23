@@ -1,3 +1,3 @@
-document.getElementById('qwe').addEventListener('click',function(){
+document.querySelector('zxc').addEventListener('click',function(){
 alert('123');
 })
