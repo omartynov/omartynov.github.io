@@ -1,3 +1,3 @@
-document.getElementById('garland_yellow_red').addEventListener('click',function(){
+document.getElementById('qwe').addEventListener('click',function(){
 alert('123');
-})
+}, false)
