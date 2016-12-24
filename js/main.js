@@ -1,4 +1,4 @@
-window.addEventListener('load', addEventSVG);
+//window.addEventListener('load', addEventSVG);
 
 function addEventSVG(){
 /* */
