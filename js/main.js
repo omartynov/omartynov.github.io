@@ -1,6 +1,5 @@
 window.addEventListener('load', loadSVG);
 
-
 function initSVG(objSVG){
 /* */
 //	var a = objSVG.getSVGDocument();
