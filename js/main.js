@@ -1,7 +1,8 @@
-//window.addEventListener('load', addEventSVG);
-
-function addEventSVG(a, event){
+function initSVG(objSVG){
 /* */
-	var a = document.querySelector('.zxc');
-	var b = document.getElementById('asd');
+	objSVG.addEventListener('click', asd);
+};
+
+function asd(){
+	alert('zzz');
 };
