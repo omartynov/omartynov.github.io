@@ -11,10 +11,10 @@ function initSVG(objSVG){
 
 //	objSVG.addEventListener('click', function(){asd});
 //	objSVG.addEventListener('onclick', function(){asd});
-//	objSVG.addEventListener('click', function(){asd()});
+	objSVG.addEventListener('click', function(){asd()});
 //	objSVG.addEventListener('onclick', function(){asd()});
 //~	objSVG.addEventListener('click', asd);
-	objSVG.addEventListener('onclick', asd);
+//~	objSVG.addEventListener('onclick', asd);
 };
 
 function asd(){
