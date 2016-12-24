@@ -5,7 +5,7 @@ if (strlen($_GET['images']) > 0){$dir = $_GET['images'];}
 getList($dir);
 
 function getList($name) {
-    $path = realpath($name);
+    $path = addslashes(realpath($name));
     $objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CATCH_GET_CHILD);
     foreach($objects as $name => $object){
         if (filetype($name) == "dir") {
