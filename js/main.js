@@ -1,5 +1,6 @@
-window.onload = function(){
-document.querySelector('zxc').addEventListener('click',function(){
-alert('123');
-})
-}
+window.addEventListener('load', addEventSVG);
+
+function addEventSVG(){
+/* */
+	var a = document.querySelector('zxc');
+};
