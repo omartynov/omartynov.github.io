@@ -1,6 +1,6 @@
 function initSVG(objSVG){
 /* */
-	objSVG.addEventListener('click', asd);
+	objSVG.addEventListener('click', asd());
 };
 
 function asd(){
