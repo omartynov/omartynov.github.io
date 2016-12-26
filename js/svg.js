@@ -9,6 +9,7 @@ function loadSVG(){
 		obj.data = '/images/garland/arch_yellow_red.svg';
 		obj.type = 'image/svg+xml';
 		obj.addEventListener('load', initSVG(this));
+		obj.addEventListener('click', initSVG(this));
 		div.appendChild(obj);
 	});
 };
