@@ -3,7 +3,7 @@ function loadSVG(){
 		var obj = document.createElement('object');
 		obj.data = '/images/garland/arch_yellow_red.svg';
 		obj.type = 'image/svg+xml';
-		obj.addEventListener('load', initSVG(this));
+		obj.addEventListener('load', initSVG(obj));
 		div.appendChild(obj);
 	});
 };
