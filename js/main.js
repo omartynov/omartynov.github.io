@@ -1,6 +1,6 @@
 window.addEventListener('load', loadSVG);
 
-function initSVG(objSVG){
+//function initSVG(objSVG){
 /* */
 //	var a = objSVG.getSVGDocument();
 //!	var b = a.getElementById('qwe');
@@ -17,4 +17,4 @@ function initSVG(objSVG){
 //	objSVG.addEventListener('onclick', function(){asd()});
 //~	objSVG.addEventListener('click', asd);
 //~	objSVG.addEventListener('onclick', asd);
-};
+//};
