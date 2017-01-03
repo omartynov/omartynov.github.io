@@ -13,6 +13,6 @@ function loadSVG(){
 		obj.type = 'image/svg+xml';
 		div.appendChild(obj);
 		
-		obj.addEventListener('load', initSVG(obj.id));
+		obj.addEventListener('SVGload', initSVG(obj.id));
 	});
 };
