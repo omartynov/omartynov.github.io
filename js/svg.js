@@ -1,6 +1,7 @@
 function initSVG(id){
 /* */
-	var a = document.getElementById(id).getSVGDocument();
+	var objSVG = document.getElementById(id);
+	var b = objSVG.getSVGDocument();
 };
 
 function loadSVG(){
