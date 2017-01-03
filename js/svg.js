@@ -9,8 +9,9 @@ function loadSVG(){
 		var obj = document.createElement('object');
 		obj.data = '/images/garland/arch_yellow_red.svg';
 		obj.type = 'image/svg+xml';
-		obj.onload = initSVG(obj);
+//		obj.onload = initSVG(obj);
 //		obj.addEventListener('SVGLoad', initSVG(obj));
 		div.appendChild(obj);
+		obj.onload = initSVG(obj);
 	});
 };
