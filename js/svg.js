@@ -13,7 +13,7 @@ function loadSVG(){
 		obj.data = '/images/' + div.id + '/arch_yellow_red.svg';
 		obj.id = 'svg_source_arch_yellow_red';
 		obj.type = 'image/svg+xml';
-		obj.addEventListener('load', function(){initSVG(obj.id);});
+		obj.addEventListener('load', function(){initSVG(this);});
 		div.appendChild(obj);
 		
 		
