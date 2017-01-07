@@ -1,7 +1,7 @@
 function initSVG(obj){
 /* */
 	var svg = obj.getSVGDocument().getElementById(obj.id.replace('source_', ''));
-	svg.addEventListener('mousedown', function(){selectSVG(this);});
+	svg.addEventListener('mousedown', function(evt){selectSVG(this);});
 };
 
 function loadSVG(){
