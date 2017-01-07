@@ -1,9 +1,7 @@
 function initSVG(id){
 /* */
-//	var objSVG = document.getElementById(id).addEventListener('load', function(){
-	var b = document.getElementById(id).getSVGDocument();
-//	});
-	
+//	var b = document.getElementById(id).getSVGDocument();	
+var b = id.getSVGDocument();
 };
 
 function loadSVG(){
