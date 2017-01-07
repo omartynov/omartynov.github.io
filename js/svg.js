@@ -1,8 +1,8 @@
 function initSVG(id){
 /* */
-	var objSVG = document.getElementById(id).addEventListener('load', function(){
+//	var objSVG = document.getElementById(id).addEventListener('load', function(){
 	var b = document.getElementById(id).getSVGDocument();
-	});
+//	});
 	
 };
 
@@ -15,6 +15,6 @@ function loadSVG(){
 		obj.type = 'image/svg+xml';
 		div.appendChild(obj);
 		
-		obj.addEventListener('SVGload', initSVG(obj.id));
+		document.getElementById(obj.id).addEventListener('load', initSVG(obj.id));
 	});
 };
