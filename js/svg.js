@@ -1,7 +1,7 @@
 function initSVG(obj){
 /* */
 	var svg = obj.getSVGDocument().getElementById(obj.id.replace('source_', ''));
-	svg.addEventListener('mousedown', function(){console.log('aaa')})
+	svg.addEventListener('mousedown', function(){selectSVG(event);});
 };
 
 function loadSVG(){
@@ -14,4 +14,9 @@ function loadSVG(){
 		obj.addEventListener('load', function(){initSVG(this);});
 		div.appendChild(obj);
 	});
+};
+
+function selectSVG(event){
+/* */
+	var svg = event.target;
 };
