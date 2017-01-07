@@ -13,9 +13,9 @@ function loadSVG(){
 		obj.data = '/images/' + div.id + '/arch_yellow_red.svg';
 		obj.id = 'svg_source_arch_yellow_red';
 		obj.type = 'image/svg+xml';
+		obj.addEventListener('load', function(){initSVG(obj.id);});
 		div.appendChild(obj);
 		
-		obj.addEventListener('load', function(){initSVG(obj.id);});
-		//document.getElementById(obj.id).addEventListener('load', function(){initSVG(obj.id);});
+		
 	});
 };
