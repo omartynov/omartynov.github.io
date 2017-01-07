@@ -16,8 +16,8 @@ function loadSVG(){
 		obj.data = '/images/' + div.id + '/arch_yellow_red.svg';
 		obj.id = 'svg_source_arch_yellow_red';
 		obj.type = 'image/svg+xml';
-		obj.draggable="yes";
-		obj.addEventListener('dragstart', function(event){console.log('aaa')});
+		obj.draggable="true";
+		obj.addEventListener('dragstart', function(event){alert('aaa')});
 		obj.addEventListener('load', function(){initSVG(this);});
 		div.appendChild(obj);
 	});
