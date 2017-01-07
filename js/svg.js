@@ -15,6 +15,6 @@ function loadSVG(){
 		obj.type = 'image/svg+xml';
 		div.appendChild(obj);
 		
-		document.getElementById(obj.id).addEventListener('load', initSVG(obj.id));
+		document.getElementById(obj.id).addEventListener('SVGload', function(){initSVG(obj.id)});
 	});
 };
