@@ -1,7 +1,6 @@
-function initSVG(id){
+function initSVG(obj){
 /* */
-//	var b = document.getElementById(id).getSVGDocument();	
-var b = id.getSVGDocument();
+	var svg = obj.getSVGDocument();
 };
 
 function loadSVG(){
@@ -13,7 +12,5 @@ function loadSVG(){
 		obj.type = 'image/svg+xml';
 		obj.addEventListener('load', function(){initSVG(this);});
 		div.appendChild(obj);
-		
-		
 	});
 };
