@@ -2,7 +2,7 @@ function initSVG(obj){
 /* */
 	var svg = obj.getSVGDocument().getElementById(obj.id.replace('source_', ''));
 //	svg.addEventListener('mousedown', function(event){selectSVG(event);});
-svg.draggable=true;
+//svg.draggable=true;
 svg.addEventListener('dragstart', function(event){console.log('aaa')});
 };
 
@@ -13,7 +13,7 @@ function loadSVG(){
 		obj.data = '/images/' + div.id + '/arch_yellow_red.svg';
 		obj.id = 'svg_source_arch_yellow_red';
 		obj.type = 'image/svg+xml';
-		obj.draggable=true;
+//		obj.draggable=true;
 		obj.addEventListener('load', function(){initSVG(this);});
 		div.appendChild(obj);
 	});
