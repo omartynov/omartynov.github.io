@@ -2,6 +2,7 @@ function initSVG(obj){
 /* */
 	var svg = obj.getSVGDocument().getElementById(obj.id.replace('source_', ''));
 //	svg.addEventListener('mousedown', function(event){selectSVG(event);});
+svg.draggable="true";
 svg.addEventListener('dragstart', function(event){console.log('aaa')});
 };
 
