@@ -35,7 +35,7 @@ function selectSVG(event){
             GrabPoint.y = TrueCoords.y - Number(transMatrix.f);
 };
 
-      function Drag(evt)
+      function dragSVG(evt)
       {
          // account for zooming and panning
          GetTrueCoords(evt);
