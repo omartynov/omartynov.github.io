@@ -1,7 +1,13 @@
+var svg_dnd = null;
+var GrabPoint = null;
+var TrueCoords = null;
+
 function initSVG(obj){
 /* */
 	var svg = obj.getSVGDocument().getElementById('svg' + obj.id.substring(obj.id.indexOf('_')));
 	svg.addEventListener('mousedown', function(event){selectSVG(event);});
+	 TrueCoords = svg.documentElement.createSVGPoint();
+         GrabPoint = svg.documentElement.createSVGPoint();
 };
 
 function loadSVG(){
@@ -18,6 +24,10 @@ function loadSVG(){
 
 function selectSVG(event){
 /* */
-	var svg = event.target;
-	
+	svg_dnd = event.target;
+	svg_dnd.parentNode.appendChild( svg_dnd );
+	svg_dnd.setAttributeNS(null, 'pointer-events', 'none');
+	 var transMatrix = svg_dnd.getCTM();
+            GrabPoint.x = TrueCoords.x - Number(transMatrix.e);
+            GrabPoint.y = TrueCoords.y - Number(transMatrix.f);
 };
