@@ -1,6 +1,7 @@
 function initSVG(obj){
 /* */
 	var svg = obj.getSVGDocument().getElementById(obj.id.substring(obj.id.indexOf('_')));
+	console.log(obj.id.substring(obj.id.indexOf('_')))
 //	var b = obj.getSVGDocument()
 //	svg.draggable="yes";
 //	b.addEventListener('dragstart', function(event){console.log('aaa')});
