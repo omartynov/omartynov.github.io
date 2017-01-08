@@ -1,12 +1,12 @@
 function initSVG(obj){
 /* */
-//	var svg = obj.getSVGDocument().getElementById(obj.id.replace('source_', ''));
+	var svg = obj.getSVGDocument().getElementById(obj.id.replace('source_', ''));
 //	var b = obj.getSVGDocument()
 //	svg.draggable="yes";
 //	b.addEventListener('dragstart', function(event){console.log('aaa')});
 //	svg.addEventListener('mousedown', function(event){selectSVG(event);});
-//svg.draggable=true;
-//svg.addEventListener('dragstart', function(event){console.log('aaa')});
+svg.draggable="true";
+svg.addEventListener('dragstart', function(){doDragStart()});
 };
 
 function loadSVG(){
@@ -17,10 +17,10 @@ function loadSVG(){
 		obj.data = '/images/' + div.id + '/arch_yellow_red.svg';
 		obj.id = 'svg_source_arch_yellow_red';
 		obj.type = 'image/svg+xml';
-		obj.draggable="true"
+//		obj.draggable="true"
 //		obj.draggable="yes";
-		obj.addEventListener('dragstart', function(){doDragStart()});
-//		obj.addEventListener('load', function(){initSVG(this);});
+//		obj.addEventListener('dragstart', function(){doDragStart()});
+		obj.addEventListener('load', function(){initSVG(this);});
 		div.appendChild(obj);
 	});
 };
