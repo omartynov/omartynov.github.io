@@ -1,4 +1,5 @@
 var svg_dnd = null;
+
 var GrabPoint = null;
 var TrueCoords = null;
 
@@ -25,7 +26,8 @@ function loadSVG(){
 
 function selectSVG(event){
 /* */
-	svg_dnd = event.target;
+	svg_dnd = event.currentTarget;
+	
 	svg_dnd.parentNode.appendChild( svg_dnd );
 	svg_dnd.setAttributeNS(null, 'pointer-events', 'none');
 	 var transMatrix = svg_dnd.getCTM();
