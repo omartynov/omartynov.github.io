@@ -12,7 +12,7 @@ function initSVG(obj){
 function loadSVG(){
 /* */
 	document.querySelectorAll('.svg_source').forEach(function(div){
-	div.addEventListener('dragstart', function(event){alert('aaa')});
+	div.addEventListener('dragstart', doDragStart);
 		var obj = document.createElement('object');
 		obj.data = '/images/' + div.id + '/arch_yellow_red.svg';
 		obj.id = 'svg_source_arch_yellow_red';
@@ -29,3 +29,10 @@ function selectSVG(event){
 	var svg = event.target;
 	
 };
+
+function doDragStart(e){
+console.log('aaa')
+//          this.style.opacity = "0.4";
+ //         this.style.border = "solid";
+  //        dragSourceElement = this;
+ }
