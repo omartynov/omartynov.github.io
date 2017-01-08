@@ -6,6 +6,7 @@ function initSVG(obj){
 /* */
 	var svg = obj.getSVGDocument().getElementById('svg' + obj.id.substring(obj.id.indexOf('_')));
 	svg.addEventListener('mousedown', function(event){selectSVG(event);});
+	var a = svg.documentElement;
 	 TrueCoords = svg.documentElement.createSVGPoint();
          GrabPoint = svg.documentElement.createSVGPoint();
 };
