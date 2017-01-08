@@ -8,6 +8,7 @@ function initSVG(obj){
 	var svg = obj.getSVGDocument().getElementById('svg' + obj.id.substring(obj.id.indexOf('_')));
 	svg.addEventListener('mousedown', function(event){selectSVG(event);});
 	svg.addEventListener('mousemove', function(event){dragSVG(event);});
+	svg.addEventListener('mouseup', function(event){dropSVG(event);});
 	var a = svg.ownerDocument.documentElement;
 	 TrueCoords = a.createSVGPoint();
          GrabPoint = a.createSVGPoint();
@@ -66,5 +67,36 @@ function selectSVG(event){
          TrueCoords.x = (evt.clientX - translation.x)/newScale;
          TrueCoords.y = (evt.clientY - translation.y)/newScale;
 
+         }
+      };
+      
+      function dropSVG(evt)
+      {
+         // if we aren't currently dragging an element, don't do anything
+         if ( svg_dnd )
+         {
+            // since the element currently being dragged has its pointer-events turned off,
+            //    we are afforded the opportunity to find out the element it's being dropped on
+            var targetElement = evt.target;
+
+            // turn the pointer-events back on, so we can grab this item later
+            svg_dnd.setAttributeNS(null, 'pointer-events', 'all');
+            if ( 'Folder' == targetElement.parentNode.id )
+            {
+               // if the dragged element is dropped on an element that is a child
+               //    of the folder group, it is inserted as a child of that group
+               targetElement.parentNode.appendChild( svg_dnd );
+               alert(svg_dnd.id + ' has been dropped into a folder, and has been inserted as a child of the containing group.');
+            }
+            else
+            {
+               // for this example, you cannot drag an item out of the folder once it's in there;
+               //    however, you could just as easily do so here
+               alert(svg_dnd.id + ' has been dropped on top of ' + targetElement.id);
+            }
+
+            // set the global variable to null, so nothing will be dragged until we
+            //    grab the next element
+            svg_dnd = null;
          }
       };
