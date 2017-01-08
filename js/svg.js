@@ -1,13 +1,7 @@
 function initSVG(obj){
 /* */
-	var svg = obj.getSVGDocument().getElementById(obj.id.substring(obj.id.indexOf('_')));
-	console.log(obj.id.substring(obj.id.indexOf('_')))
-//	var b = obj.getSVGDocument()
-//	svg.draggable="yes";
-//	b.addEventListener('dragstart', function(event){console.log('aaa')});
-//	svg.addEventListener('mousedown', function(event){selectSVG(event);});
-svg.draggable="true";
-svg.addEventListener('dragstart', function(){doDragStart()});
+	var svg = obj.getSVGDocument().getElementById('svg' + obj.id.substring(obj.id.indexOf('_')));
+	svg.addEventListener('mousedown', function(event){selectSVG(event);});
 };
 
 function loadSVG(){
@@ -27,10 +21,3 @@ function selectSVG(event){
 	var svg = event.target;
 	
 };
-
-function doDragStart(e){
-console.log('aaa')
-//          this.style.opacity = "0.4";
- //         this.style.border = "solid";
-  //        dragSourceElement = this;
- }
