@@ -19,7 +19,7 @@ function loadSVG(){
 		obj.type = 'image/svg+xml';
 		obj.draggable="true"
 //		obj.draggable="yes";
-		obj.addEventListener('dragstart', doDragStart);
+		obj.addEventListener('dragstart', function(){doDragStart});
 //		obj.addEventListener('load', function(){initSVG(this);});
 		div.appendChild(obj);
 	});
