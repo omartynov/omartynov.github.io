@@ -58,9 +58,13 @@ function selectSVG(event){
       {
          // find the current zoom level and pan setting, and adjust the reported
          //    mouse position accordingly
-         var a = svg_dnd.ownerDocument.documentElement;
+         if (svg_dnd)
+         {
+                  var a = svg_dnd.ownerDocument.documentElement;
          var newScale = a.currentScale;
          var translation = a.currentTranslate;
          TrueCoords.x = (evt.clientX - translation.x)/newScale;
          TrueCoords.y = (evt.clientY - translation.y)/newScale;
+
+         }
       };
