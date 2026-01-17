@@ -1,5 +1,246 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Swift + macOS: учебный проект книжного трекера</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 32px 20px 56px;
+      line-height: 1.6;
+      background: #f6f7fb;
+      color: #1d1d1f;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 28px 32px 40px;
+      border-radius: 16px;
+      box-shadow: 0 18px 30px rgba(15, 15, 20, 0.08);
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin-top: 24px;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 2.1rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      border-top: 1px solid #eef0f5;
+      padding-top: 20px;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      display: inline-block;
+      background: #eff2ff;
+      color: #2438d5;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #f4f6ff;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .note {
+      background: #fff3e6;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border-left: 4px solid #ffb35a;
+    }
+
+    code {
+      background: #eff1f7;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: "SF Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+  </style>
+</head>
 <body>
+  <main>
+    <span class="pill">Swift • macOS • Xcode</span>
+    <h1>Учебный проект: книжный трекер для macOS</h1>
+    <p>
+      Мы начинаем серию коротких лекций с практикой. Цель — шаг за шагом создать
+      приложение для списка прочитанных, рекомендованных и запланированных книг.
+      Вы сказали, что хотите максимальную детализацию, но только по тем темам,
+      которые реально используем — это и будет нашей стратегией.
+    </p>
+
+    <h2>Исходные требования (по вашим ответам)</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Платформа</h3>
+        <p>Стартуем с <strong>macOS</strong>, затем расширяем на iOS.</p>
+      </div>
+      <div class="card">
+        <h3>Списки</h3>
+        <p>Прочитанные + Рекомендованные + В процессе.</p>
+      </div>
+      <div class="card">
+        <h3>Данные книги</h3>
+        <p>Название, автор, статус, год, обложка.</p>
+      </div>
+      <div class="card">
+        <h3>Функции</h3>
+        <p>Поиск + фильтры по статусу. Без рейтингов и заметок.</p>
+      </div>
+    </div>
+
+    <h2>Как будет устроено обучение</h2>
+    <ul>
+      <li><strong>Короткая лекция:</strong> 10–15 минут теории и терминов.</li>
+      <li><strong>Практика:</strong> делаем небольшой шаг в Xcode.</li>
+      <li><strong>Разбор:</strong> почему так, а не иначе (с рекомендациями Apple).</li>
+      <li><strong>Итог:</strong> что мы получили и что дальше.</li>
+    </ul>
+
+    <h2>Лекция 1. Архитектура будущего приложения</h2>
+    <p class="note">
+      Сегодня мы не пишем код — мы строим план. Это важно, чтобы дальше не «чинить»
+      структуру приложения по ходу.
+    </p>
+
+    <h3>1) Минимальная архитектура</h3>
+    <p>
+      Для старта мы используем современный подход Apple — <strong>SwiftUI</strong> для UI
+      и <strong>Model</strong> для данных. Вы пока не знаете, что такое <code>struct</code>
+      и <code>class</code>, поэтому сегодня объясним именно их роль в проекте.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Model (Данные)</h3>
+        <p>Описание книги: название, автор, год, статус, обложка.</p>
+      </div>
+      <div class="card">
+        <h3>View (Экран)</h3>
+        <p>Список книг, поиск, фильтр по статусу.</p>
+      </div>
+      <div class="card">
+        <h3>Storage (Хранилище)</h3>
+        <p>Локальное сохранение списка на Mac (без облака).</p>
+      </div>
+    </div>
+
+    <h3>2) Почему мы начинаем со struct</h3>
+    <p>
+      В Swift есть два основных способа описывать данные: <code>struct</code> и
+      <code>class</code>. Мы начнем со <code>struct</code>, потому что:
+    </p>
+    <ul>
+      <li>Он проще в обучении и лучше подходит для «простых данных» вроде книги.</li>
+      <li>SwiftUI оптимизирован под использование <code>struct</code>.</li>
+      <li>Для ваших задач это более безопасный и предсказуемый вариант.</li>
+    </ul>
+
+    <h3>3) Паттерны и принципы (без перегруза)</h3>
+    <p>
+      Термин «паттерн» — это просто устойчивое решение типичной задачи. Мы не будем
+      заучивать теорию, а введем минимально нужные элементы:
+    </p>
+    <ul>
+      <li><strong>Разделение ответственности:</strong> данные отдельно от UI.</li>
+      <li><strong>Однонаправленный поток данных:</strong> UI читает модель, а не наоборот.</li>
+      <li><strong>Маленькие шаги:</strong> каждую лекцию добавляем один слой.</li>
+    </ul>
+
+    <h2>Практика (подготовка к следующему шагу)</h2>
+    <ol>
+      <li>Установить Xcode последней версии из Mac App Store.</li>
+      <li>Создать новый проект: <strong>App</strong> → <strong>SwiftUI</strong> → macOS.</li>
+      <li>Назвать проект <strong>BookTracker</strong>.</li>
+    </ol>
+
+    <p>
+      На следующей лекции мы создадим первый <code>struct Book</code> и отобразим
+      тестовый список в интерфейсе. Подробно разберем, как SwiftUI строит экран.
+    </p>
+
+    <h2>Результат лекции 1</h2>
+    <ul>
+      <li>Есть ясный план приложения и список ключевых экранов.</li>
+      <li>Определен минимальный набор данных о книге (название, автор, статус, год, обложка).</li>
+      <li>Вы понимаете, почему начинаем со <code>struct</code> и почему SwiftUI подходит для macOS.</li>
+      <li>Подготовлена среда разработки: проект <strong>BookTracker</strong> создан в Xcode.</li>
+    </ul>
+
+    <h2>Лекция 2. Первый экран и модель данных</h2>
+    <p class="note">
+      На этом шаге мы впервые пишем код. Цель — создать модель книги и показать
+      тестовый список на экране. Это даст базовое понимание <code>struct</code> и
+      того, как SwiftUI строит интерфейс.
+    </p>
+
+    <h3>1) Что такое <code>struct</code> (на практике)</h3>
+    <p>
+      <code>struct</code> — это «контейнер» для данных. Мы создаем тип <code>Book</code>
+      с набором свойств: название, автор, год, статус, обложка. Именно так мы
+      описываем «книгу» для приложения.
+    </p>
+
+    <div class="card">
+      <h3>Минимальная модель Book</h3>
+      <p>Название, автор, год, статус, обложка — это наши свойства.</p>
+      <p><code>struct Book { ... }</code></p>
+    </div>
+
+    <h3>2) Как SwiftUI строит экран</h3>
+    <p>
+      SwiftUI работает декларативно: мы «описываем», как должен выглядеть экран,
+      а система сама обновляет его при изменениях данных. Для списка используем
+      <code>List</code>, а для строки книги — простой <code>HStack</code>.
+    </p>
+
+    <h3>3) Практика в Xcode</h3>
+    <ol>
+      <li>Откройте проект <strong>BookTracker</strong>.</li>
+      <li>Создайте новый файл <strong>Swift File</strong> и назовите его <strong>Book</strong>.</li>
+      <li>Опишите <code>struct Book</code> с нужными свойствами.</li>
+      <li>В <strong>ContentView</strong> добавьте тестовый массив книг.</li>
+      <li>Отобразите список в <code>List</code> и выведите название и автора.</li>
+    </ol>
+
+    <h2>Результат лекции 2</h2>
+    <ul>
+      <li>Создан <code>struct Book</code> и вы понимаете роль его свойств.</li>
+      <li>Отображен тестовый список книг в SwiftUI.</li>
+      <li>Вы увидели, как работает декларативный UI и почему это удобно.</li>
+    </ul>
+  </main>
 </body>
 </html>
