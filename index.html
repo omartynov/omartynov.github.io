@@ -210,7 +210,8 @@
     <p>
       <code>struct</code> — это «контейнер» для данных. Мы создаем тип <code>Book</code>
       с набором свойств: название, автор, год, статус, обложка. Именно так мы
-      описываем «книгу» для приложения.
+      описываем «книгу» для приложения. Для списка в SwiftUI нам также нужен
+      уникальный идентификатор — поэтому добавим <code>id</code> с типом <code>UUID</code>.
     </p>
 
     <div class="card">
@@ -223,23 +224,75 @@
     <p>
       SwiftUI работает декларативно: мы «описываем», как должен выглядеть экран,
       а система сама обновляет его при изменениях данных. Для списка используем
-      <code>List</code>, а для строки книги — простой <code>HStack</code>.
+      <code>List</code>, а для строки книги — простой <code>HStack</code>. Чтобы
+      показать обложку, используем стандартный <code>Image</code> со
+      <code>systemName</code> (пока без загрузки реальных картинок).
     </p>
 
-    <h3>3) Практика в Xcode</h3>
+    <h3>3) Практика в Xcode (подробно)</h3>
     <ol>
       <li>Откройте проект <strong>BookTracker</strong>.</li>
       <li>Создайте новый файл <strong>Swift File</strong> и назовите его <strong>Book</strong>.</li>
-      <li>Опишите <code>struct Book</code> с нужными свойствами.</li>
+      <li>Опишите <code>struct Book</code> с нужными свойствами и идентификатором.</li>
       <li>В <strong>ContentView</strong> добавьте тестовый массив книг.</li>
-      <li>Отобразите список в <code>List</code> и выведите название и автора.</li>
+      <li>Отобразите список в <code>List</code> и выведите название, автора и год.</li>
+      <li>Добавьте простую иконку-обложку через <code>Image(systemName:)</code>.</li>
     </ol>
+
+    <h3>4) Итоговый код лекции 2</h3>
+    <p>Ниже полный минимальный код, который должен запуститься в проекте.</p>
+    <pre><code>// Book.swift
+import Foundation
+
+struct Book: Identifiable {
+    let id = UUID()
+    let title: String
+    let author: String
+    let year: Int
+    let status: String
+    let coverSystemName: String
+}
+
+// ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    let books: [Book] = [
+        Book(title: "Мастер и Маргарита", author: "М. Булгаков", year: 1967, status: "Прочитана", coverSystemName: "book.closed"),
+        Book(title: "1984", author: "Дж. Оруэлл", year: 1949, status: "В процессе", coverSystemName: "book"),
+        Book(title: "Преступление и наказание", author: "Ф. Достоевский", year: 1866, status: "Рекомендована", coverSystemName: "books.vertical")
+    ]
+
+    var body: some View {
+        List(books) { book in
+            HStack(spacing: 12) {
+                Image(systemName: book.coverSystemName)
+                    .font(.title2)
+                    .foregroundColor(.accentColor)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(book.title)
+                        .font(.headline)
+                    Text("\\(book.author) • \\(book.year)")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+                Text(book.status)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding(.vertical, 6)
+        }
+        .navigationTitle("BookTracker")
+    }
+}</code></pre>
 
     <h2>Результат лекции 2</h2>
     <ul>
       <li>Создан <code>struct Book</code> и вы понимаете роль его свойств.</li>
       <li>Отображен тестовый список книг в SwiftUI.</li>
       <li>Вы увидели, как работает декларативный UI и почему это удобно.</li>
+      <li>У вас есть работающий минимальный код первого экрана.</li>
     </ul>
   </main>
 </body>
