@@ -294,6 +294,149 @@ struct ContentView: View {
       <li>Вы увидели, как работает декларативный UI и почему это удобно.</li>
       <li>У вас есть работающий минимальный код первого экрана.</li>
     </ul>
+
+    <h2>Лекция 3. Статусы, фильтр и поиск</h2>
+    <p class="note">
+      Теперь сделаем экран «живым»: добавим типизированный статус книги, фильтр
+      по статусу и поиск по названию/автору. Это первая лекция, где мы начнем
+      управлять состоянием интерфейса.
+    </p>
+
+    <h3>1) Почему нужен <code>enum</code></h3>
+    <p>
+      Статус книги — это ограниченный набор значений. Вместо строки используем
+      <code>enum</code>, чтобы избежать опечаток и сделать код понятнее. Например:
+      <code>read</code>, <code>reading</code>, <code>recommended</code>. Такой подход
+      отражает правила домена прямо в коде.
+    </p>
+
+    <h3>2) Где хранить состояние интерфейса</h3>
+    <p>
+      Поиск и фильтры — это состояние, которое меняется пользователем. В SwiftUI
+      мы храним его в <code>@State</code>. Это специальная обертка: когда значение
+      меняется, SwiftUI автоматически перестраивает экран.
+    </p>
+
+    <h3>3) Практика в Xcode (пошагово)</h3>
+    <ol>
+      <li>Создайте <code>enum BookStatus</code> с тремя вариантами.</li>
+      <li>Добавьте вычисляемые свойства <code>title</code> и <code>color</code> для красивого UI.</li>
+      <li>Обновите <code>Book</code>: замените строковый статус на <code>BookStatus</code>.</li>
+      <li>В <code>ContentView</code> добавьте <code>@State</code> для фильтра и текста поиска.</li>
+      <li>Добавьте <code>Picker</code> для выбора статуса и <code>TextField</code> для поиска.</li>
+      <li>Создайте вычисляемое свойство <code>filteredBooks</code> и отобразите его в <code>List</code>.</li>
+    </ol>
+
+    <h3>4) Итоговый код лекции 3</h3>
+    <p>Ниже минимальный рабочий пример с фильтром и поиском.</p>
+    <pre><code>// BookStatus.swift
+import SwiftUI
+
+enum BookStatus: String, CaseIterable, Identifiable {
+    case read
+    case reading
+    case recommended
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .read: return "Прочитана"
+        case .reading: return "В процессе"
+        case .recommended: return "Рекомендована"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .read: return .green
+        case .reading: return .orange
+        case .recommended: return .blue
+        }
+    }
+}
+
+// Book.swift (обновление)
+import Foundation
+
+struct Book: Identifiable {
+    let id = UUID()
+    let title: String
+    let author: String
+    let year: Int
+    let status: BookStatus
+    let coverSystemName: String
+}
+
+// ContentView.swift (обновление)
+import SwiftUI
+
+struct ContentView: View {
+    @State private var selectedStatus: BookStatus? = nil
+    @State private var searchText = ""
+
+    let books: [Book] = [
+        Book(title: "Мастер и Маргарита", author: "М. Булгаков", year: 1967, status: .read, coverSystemName: "book.closed"),
+        Book(title: "1984", author: "Дж. Оруэлл", year: 1949, status: .reading, coverSystemName: "book"),
+        Book(title: "Преступление и наказание", author: "Ф. Достоевский", year: 1866, status: .recommended, coverSystemName: "books.vertical")
+    ]
+
+    var filteredBooks: [Book] {
+        books.filter { book in
+            let matchesStatus = selectedStatus == nil || book.status == selectedStatus
+            let matchesSearch = searchText.isEmpty ||
+                book.title.localizedCaseInsensitiveContains(searchText) ||
+                book.author.localizedCaseInsensitiveContains(searchText)
+            return matchesStatus && matchesSearch
+        }
+    }
+
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 12) {
+                TextField("Поиск по названию или автору", text: $searchText)
+                    .textFieldStyle(.roundedBorder)
+
+                Picker("Статус", selection: $selectedStatus) {
+                    Text("Все").tag(BookStatus?.none)
+                    ForEach(BookStatus.allCases) { status in
+                        Text(status.title).tag(BookStatus?.some(status))
+                    }
+                }
+                .pickerStyle(.segmented)
+
+                List(filteredBooks) { book in
+                    HStack(spacing: 12) {
+                        Image(systemName: book.coverSystemName)
+                            .font(.title2)
+                            .foregroundColor(.accentColor)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(book.title)
+                                .font(.headline)
+                            Text("\\(book.author) • \\(book.year)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        Spacer()
+                        Text(book.status.title)
+                            .font(.caption)
+                            .foregroundColor(book.status.color)
+                    }
+                    .padding(.vertical, 6)
+                }
+            }
+            .padding()
+            .navigationTitle("BookTracker")
+        }
+    }
+}</code></pre>
+
+    <h2>Результат лекции 3</h2>
+    <ul>
+      <li>Статус книги типизирован через <code>enum</code>.</li>
+      <li>Работают фильтр по статусу и поиск по названию/автору.</li>
+      <li>Вы понимаете, как состояние влияет на UI через <code>@State</code>.</li>
+    </ul>
   </main>
 </body>
 </html>
